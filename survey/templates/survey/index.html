@@ -1,0 +1,21 @@
+{% extends 'survey/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block main %}
+<div class="container">
+{% if user.is_authenticated %}
+  <h2>こんにちは{{ user.first_name }}さん</h2>
+  {% if responded %}
+  <p>アンケート回答ありがとうございました。</p>
+  <a href="{% url 'survey:edit' %}"><button>アンケート編集</button></a>
+  {% else %}
+  <p>アンケート回答をお願いします。</p>
+  <a href="{% url 'survey:edit' %}"><button>アンケート回答</button></a>
+  {% endif %}
+{% else %}
+  <p>ログインしてアンケート回答をお願いします。</p>
+  <a href="{% url 'survey:login' %}"><button>ログイン</button></a>
+{% endif %}
+</div>
+{% endblock %}

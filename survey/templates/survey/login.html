@@ -1,0 +1,15 @@
+{% extends 'survey/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block header %}<h3>ログインページ<h3>{% endblock%}
+
+{% block main %}
+<div class="container">
+  <form action="#" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="ログイン">
+  </form>
+</div>
+{% endblock %}

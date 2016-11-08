@@ -1,0 +1,59 @@
+{% extends 'survey/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Edit{% endblock %}
+
+{% block main %}
+<div class="container">
+{% for field in form  %}
+  {% if field.errors %}
+<div class="alert alert-danger">
+  {{ form.errors }}
+</div>
+  {% endif %}
+{% endfor %}
+<form action="{% url 'survey:edit' %}" method="POST">
+  {% csrf_token %}
+  <p>1. 本日の「Webアプリケーションを作ってみよう！」を受講して、どんな学びを得ましたか？</p>
+  <div class="form-group">
+    <label for="{{ form.how_about_handson.id_for_label }}">・今日得た学びについて、自由に記載してください。</label>
+    {{ form.how_about_handson }}
+  </div>
+  <div class="form-group">
+    <label for="{{ form.difficult_points.id_for_label }}">・わかりにくいと感じた項はどれですか？（複数回答可）</label>
+    {{ form.difficult_points}}
+  </div>
+  <div class="form-group">
+    <label for="{{ form.difficult_other.id_for_label }}">・その他を選択された方は具体的に記載してください</label>
+    {{ form.difficult_other }}
+  </div>
+  <p>2. 本日の「Webアプリケーションを作ってみよう！」の運営についてお聞かせください。</p>
+  <div class="form-group">
+    <label for="{{ form.time_settings.id_for_label }}">・時間の設定</label>
+    {{ form.time_settings }}
+  </div>
+  <div class="form-group">
+    <label for="{{ form.handson_level.id_for_label }}">・内容のレベル感</label>
+    {{ form.handson_level }}
+  </div>
+  <div class="form-group">
+    <label for="{{ form.handson_interest.id_for_label }}">・内容はご自身の興味関心に沿っていましたか？</label>
+    {{ form.handson_interest }}
+  </div>
+  <div class="form-group">
+    <label for="{{ form.handson_quantity.id_for_label }}">・内容の分量</label>
+    {{ form.handson_quantity }}
+  </div>
+  <div class="form-group">
+    <label for="{{ form.free_opinions.id_for_label }}">・運営へのご意見を自由にお書きください</label>
+    {{ form.free_opinions }}
+  </div>
+  <div class="form-group">
+    <label for="{{ form.interest_trainings.id_for_label }}">3. 今後受けてみたい研修がありましたら、自由にお書きください。</label>
+    {{ form.interest_trainings }}
+  </div>
+  <p>お疲れ様でした!</p>
+  <button type="submit" class="btn btn-primary">回答</button>
+</form>
+</div>
+{% endblock %}
