@@ -33,16 +33,11 @@ def edit_view(request):
     context = { 'form': form }
     return render(request, 'survey/edit.html', context)
 
-  if Questionnaire.objects.filter(user=user).exists():
-    q = Questionnaire.objects.get(user=user)
-    form = QuestionnaireForm(request.POST, instance=q)
-  else:
-    form = QuestionnaireForm(request.POST)
-  print(form.__dict__)
-  print(form.errors)
+  q, created = Questionnaire.objects.get_or_create(user=user)
+  form =  QuestionnaireForm(request.POST, instance=q)
   if form.is_valid():
-    q = form.save(commit=False)
-    q.user = request.user
+    #q = form.save(commit=False)
+    #q.user = request.user
     q.save()
     return HttpResponseRedirect(reverse('survey:index'))
   else:
